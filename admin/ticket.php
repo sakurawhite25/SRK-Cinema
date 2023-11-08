@@ -110,7 +110,7 @@
                 <td><img src="images/"></td>
                 <td>Ticket Movie A</td>
                 <td>100</td>
-                <td>Rm21.00</td>
+                <td>Rm211.00</td>
                 <td>
                   <button><i class="fa-solid fa-pen-to-square"></i></button>
                   <button><i class="fa-solid fa-trash-can"></i></button>
