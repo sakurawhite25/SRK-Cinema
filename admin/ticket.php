@@ -107,10 +107,43 @@
             <tbody>
               <tr>
                 <td>1</td>
-                <td><img src="images/"></td>
+                <td><img src="images/ticket_A.png"></td>
                 <td>Ticket Movie A</td>
                 <td>100</td>
-                <td>Rm211.00</td>
+                <td>Rm21.00</td>
+                <td>
+                  <button><i class="fa-solid fa-pen-to-square"></i></button>
+                  <button><i class="fa-solid fa-trash-can"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><img src="images/ticket_B.png"></td>
+                <td>Ticket Movie B</td>
+                <td>100</td>
+                <td>Rm14.00</td>
+                <td>
+                  <button><i class="fa-solid fa-pen-to-square"></i></button>
+                  <button><i class="fa-solid fa-trash-can"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td><img src="images/ticket_C.png"></td>
+                <td>Ticket Movie C</td>
+                <td>100</td>
+                <td>Rm26.00</td>
+                <td>
+                  <button><i class="fa-solid fa-pen-to-square"></i></button>
+                  <button><i class="fa-solid fa-trash-can"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td><img src="images/ticket_D.png"></td>
+                <td>Ticket Movie D</td>
+                <td>100</td>
+                <td>Rm12.00</td>
                 <td>
                   <button><i class="fa-solid fa-pen-to-square"></i></button>
                   <button><i class="fa-solid fa-trash-can"></i></button>
@@ -118,6 +151,14 @@
               </tr>
             </tbody>
           </table>
+          <div class="pagination">
+            <div><i class="fa-solid fa-angles-left"></i></div>
+            <div><i class="fa-solid fa-angle-left"></i></div>
+            <div>1</div>
+            <div>2</div>
+            <div><i class="fa-solid fa-angle-right"></i></div>
+            <div><i class="fa-solid fa-angles-right"></i></div>
+          </div>
         </div>
       </div>
       
