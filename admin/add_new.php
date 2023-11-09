@@ -5,7 +5,7 @@ include_once('include/db.php');
 if (isset($_FILES["movie_image"]) && isset($_FILES["movie_trailer"])) {
         // Process the first file
         $image1 = $_FILES["movie_image"]["tmp_name"];
-        $image = "images/" . $_FILES["movie_image"]["name"];
+        $image = "image/" . $_FILES["movie_image"]["name"];
         // Process the second file
         $trailer1 = $_FILES["movie_trailer"]["tmp_name"];
         $trailer = "trailer/" . $_FILES["movie_trailer"]["name"];
@@ -15,7 +15,7 @@ if (isset($_FILES["movie_image"]) && isset($_FILES["movie_trailer"])) {
 
        if (move_uploaded_file($trailer1, $trailer) && move_uploaded_file($image1, $image) ) {
            // Insert into database
-             $query = "INSERT INTO `movie`(movie_name, movie_image, movie_duration, movie_description, movie_trailer, movie_status) VALUES('$name', '$image', '$time', '$description', '$trailer', 'Now Showing')";
+		   echo $query = "INSERT INTO `movie` (`movie_name`, `movie_image`, `movie_duration`, `movie_description`, `movie_trailer`, `movie_status`, `release_date`) VALUES ('$name', '$newFilePath1', '$time', '$description', '$newFilePath2', 'now showing', '$release_date')";
            if (mysqli_query($conn, $query)) {
             echo "<script>alert('Sucessfully Add')</script>";
         }
@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
 	if (isset($_FILES["movie_image"]) && isset($_FILES["movie_trailer"])) {
        // Process the first file
        $tmpFilePath1 = $_FILES["movie_image"]["tmp_name"];
-       $newFilePath1 = "images/" . $_FILES["movie_image"]["name"];
+       $newFilePath1 = "image/" . $_FILES["movie_image"]["name"];
        // Process the second file
        $tmpFilePath2 = $_FILES["movie_trailer"]["tmp_name"];
        $newFilePath2 = "trailer/" . $_FILES["movie_trailer"]["name"];
@@ -70,14 +70,13 @@ if (isset($_POST['submit'])) {
 			    <input type="file" name="movie_image">
 			</div>
 			<div>
-				<label for="movie_duration">Time: </label>
-			    <input type="text" name="movie_duration" id="movie_duration" placeholder="Enter m0ovie duration (e.g., 1h 49m)">
-
-			</div>
-			<div>
-				<label for="release_date">Releasedate: </label>
-			    <input type="date" name="release_date">
-			</div>
+    <label for="movie_duration">Time: </label>
+    <input type="text" name="movie_duration" id="movie_duration" placeholder="Enter movie duration (e.g., 1h 49m)">
+</div>
+<div>
+    <label for="release_date">Release Date: </label>
+    <input type="date" name="release_date">
+</div>
 			<div>
 				<label for="movie_description">Description: </label>
 			</div>

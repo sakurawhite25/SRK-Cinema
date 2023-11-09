@@ -1,5 +1,7 @@
 <?php
 include_once('include/db.php');
+$qry1 = "SELECT * FROM movie";
+$sql1 = mysqli_query($conn,$qry1);
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +12,26 @@ include_once('include/db.php');
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+       .line-bar-menu {
+    display: flex;
+    justify-content: space-between;
+    background-color: #333; /* 背景颜色 */
+    color: #fff; /* 文字颜色 */
+    padding: 10px;
+}
+
+.menu-item {
+    padding: 10px 20px; /* 调整内边距以适应样式 */
+    cursor: pointer; /* 鼠标指针样式 */
+    transition: background-color 0.3s; /* 添加过渡效果 */
+}
+
+.menu-item.active {
+    background-color: #f00; /* 活动选项的背景颜色 */
+    color: #fff; /* 活动选项的文字颜色 */
+}
+    </style>
 
   <title>Customer Interface</title>
 </head>
@@ -28,8 +50,13 @@ include_once('include/db.php');
   </div>
  
 <body>
+
 <div class="container">
-  <h2>Now Showing</h2>
+  <br>
+  <br>
+  <br>
+  <br>
+  
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -79,6 +106,11 @@ include_once('include/db.php');
   </div>
 </div>
 
+<div class="line-bar-menu">
+    <div class="menu-item active">Now Showing</div>
+    <div class="menu-item">Coming Soon</div>
+</div>
+
 <script>
 let slideIndex = 0;
 showSlides();
@@ -100,6 +132,20 @@ function showSlides() {
   setTimeout(showSlides, 2000); // Change image every 2 seconds
 }
 </script>
+
+
+
+<tr>
+        <?php while($row = mysqli_fetch_array($sql1))  {?>
+            <td><?=$row["movie_name"]?></td>
+            <td><img src="<?=$row["movie_image"]?>" alt="Movie Image"></td>
+            <td><?=$row["movie_description"]?></td>
+            <td><?=$row["movie_duration"]?></td>
+            <td><?=$row["release_date"]?></td>
+            <td><?=$row["movie_type"]?></td>
+            <td><?=$row["movie_status"]?></td>  
+        </tr>
+        <?php  }?>
 
 </body>
 </html> 
