@@ -9,7 +9,6 @@
 body
 {
   background: #000;
-  min-height: 200vh;
 }
 header
 {
@@ -23,7 +22,6 @@ header
   transition: 0.6s;
   padding: 40px 100px;
   z-index: 100000;
-  color: #FFF !important;
 }
 header.sticky
 {
@@ -40,6 +38,10 @@ header .logo
   text-transform: uppercase;
   letter-spacing: 2px;
   transition: 0.6s;
+  margin-right: 5px; /* 向左移动10px */
+}
+header.sticky .logo {
+  color: #000; /* Change the logo color when header is sticky */
 }
 header ul
 {
@@ -52,14 +54,13 @@ header ul li
 {
   position:relative;
   list-style: none;
-  color: #FFF;
 }
-header ul a
+header ul li a
 {
   position: relative;
   margin: 0 15px;
   text-decoration: none;
-  color:#FFF;
+  color:#fff;
   letter-spacing: 2px;
   font-weight: 500px;
   transform: 0.6s;
@@ -71,7 +72,40 @@ header ul a
   height: 100vh;
   background-size: cover;
 }
+header.sticky.logo,
 header.sticky  ul li a
 {
   color: #000;
+}
+/* Search container styles */
+.search-container {
+  margin-left: 100px; /* 向右移动10px */
+}
+
+/* Search input styles */
+#searchInput {
+  padding: 3px;
+  width: 200px;
+  border: 1px solid #000; /* 黑色边框 */
+  border-radius: 5px;
+  margin-left: 5px; /* 向右移动10px */
+  font-size: 16px;
+  color: #000; /* 黑色文字颜色 */
+}
+
+/* Search button styles */
+#searchButton {
+  background-color: #000; /* 黑色背景 */
+  color: #fff; /* 白色文字颜色 */
+  border: none;
+  border-radius: 5px;
+  padding: 5px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+/* Change search button background color on hover */
+#searchButton:hover {
+  background-color: #333; /* 鼠标悬停时的背景颜色变暗 */
 }
