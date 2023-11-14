@@ -95,8 +95,8 @@ $result  = mysqli_query($conn, $query);
           <p>Movies Details</p>
           <div>
             <input placeholder="Movies"/>
-            <button class="add_new">+ Add New</button>
-            <button class="add_new"> Schedule</button>
+            <button class="add_new" onclick="window.location.href='add_new.php'">+ Add New</button>
+            <button class="add_new" onclick="window.location.href='arrange_schedule.php'"> Schedule</button>
           </div>
         </div>
         <div class="table_section">
