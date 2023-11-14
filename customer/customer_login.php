@@ -53,11 +53,7 @@ if(isset($_POST['submit'])){
                     <button type="button" class="toggle-btn" onclick="login()">Log In</button>
                     <button type="button" class="toggle-btn" onclick="register()">Register</button>
                 </div>
-                <div class="social-icons">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                </div>
+                
             <form id="login" class="input-group">
                 <input type="text" class="input-field" placeholder="UserName" required>
                 <input type="text" class="input-field" placeholder="Password" required>
