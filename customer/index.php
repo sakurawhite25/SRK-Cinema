@@ -11,6 +11,7 @@ $sql1 = mysqli_query($conn, $qry1);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/index.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -78,17 +79,38 @@ $sql1 = mysqli_query($conn, $qry1);
     </div>
   </div>
 
-  <div class="movie-listings">
-    <div class="section">
-      <h2>Now Showing</h2>
-      <div class="movie">
-        <img src="now_showing_movie1.jpg" alt="Now Showing Movie 1">
-        <h3>Movie Title 1</h3>
-        <p>Description of Now Showing Movie 1.</p>
-        <button>Trailer</button>
-      </div>
-      <!-- Add more "Now Showing" movies as needed -->
-    </div>
+  <table class="movie-listings">
+  <tr>
+    <td>
+      <h2 style="color: white;">Now Showing</h2>
+    </td>
+  </tr>
+  <tr>
+    <?php while ($row = mysqli_fetch_array($sql1)) { ?>
+      <td class="movie">
+        <div>
+          <div><?= $row["movie_name"] ?></div>
+          <img src="<?= $row["movie_image"] ?>" alt="Movie Image" width="180" height="250">
+          <div><h5>Movie Description</h5>
+          <p><?= $row["movie_description"] ?></p>
+          </div>
+          <div><h5>Movie Duration</h5>
+          <p><?= $row["movie_duration"] ?></p>
+        </div>
+          <div><h5>Release Date</h5>
+          <p><?= $row["release_date"] ?></p>
+        </div>
+          <div><h5>Movie Type</h5>
+          <p><?= $row["movie_type"] ?></p>
+        </div>
+          <div><h5>Movie Status</h5>
+          <p><?= $row["movie_status"] ?></p>
+        </div>
+        </div>
+      </td>
+    <?php } ?>
+  </tr>
+</table>
     <div class="section">
       <h2>Coming Soon</h2>
       <div class="movie">
@@ -156,29 +178,7 @@ $sql1 = mysqli_query($conn, $qry1);
 
 
 
-<tr>
-  <?php while ($row = mysqli_fetch_array($sql1)) { ?>
-    <td>
-      <?= $row["movie_name"] ?>
-    </td>
-    <td><img src="<?= $row["movie_image"] ?>" alt="Movie Image"></td>
-    <td>
-      <?= $row["movie_description"] ?>
-    </td>
-    <td>
-      <?= $row["movie_duration"] ?>
-    </td>
-    <td>
-      <?= $row["release_date"] ?>
-    </td>
-    <td>
-      <?= $row["movie_type"] ?>
-    </td>
-    <td>
-      <?= $row["movie_status"] ?>
-    </td>
-  </tr>
-<?php } ?>
+
 
 </body>
 

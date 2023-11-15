@@ -12,6 +12,7 @@ body {
   font-size: 35px;
 }
 
+
 .grid-container {
   display: grid;
   grid-template-columns: 260px 1fr 1fr 1fr;
@@ -219,4 +220,22 @@ body {
   .hedaer-left {
     display: none;
   }
+}
+h5 {
+  font-size: 18px; /* 调整字体大小 */
+  font-weight: bold; /* 加粗文字 */
+  color: white; /* 设置颜色为白色 */
+  margin: 5px 0; /* 设置标题的上下外边距 */
+}
+
+p {
+  font-size: 14px; /* 调整字体大小 */
+  color: darkgray; /* 设置颜色为白色 */
+  margin: 5px 0; /* 设置标题的上下外边距 */
+}
+
+
+.movie img {
+  display: block;
+  margin-bottom: 10px; /* 设置图像的下外边距 */
 }

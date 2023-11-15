@@ -10,19 +10,25 @@ if(isset($_POST['submit'])){
 	$trl_location = "../trailer/".$_FILES["movie_trailer"]["name"];
 	$name = $_POST['movie_name'];
 	$description = $_POST['movie_description'];
-	$duration = $_POST['movie_duration'];
-	$date = $_POST['release_date'];
-	$type = $_POST['movie_type'];
 
-	if(move_uploaded_file($image,$img_location) && move_uploaded_file($trailer,$trl_location)){
-		$query = "INSERT INTO `movie`(movie_name, movie_image, movie_trailer, movie_description, movie_duration, release_date, movie_type, movie_status) VALUES('$name', '$img_location',  '$trl_location', '$description', '$duration', '$date', '$type', 'Now Showing')";
-
-		if (mysqli_query($conn,$query)) {
-			echo "<script>alert('add successfully')</script>";
-		} else {
-			echo "<script>window.location.href = 'movies.php';alert('failed to add');</script>";
-		}
-	}
+	if (isset($_FILES["movie_image"]) && isset($_FILES["movie_trailer"])) {
+       // Process the first file
+       $tmpFilePath1 = $_FILES["movie_image"]["tmp_name"];
+       $newFilePath1 = "image/" . $_FILES["movie_image"]["name"];
+       // Process the second file
+       $tmpFilePath2 = $_FILES["movie_trailer"]["tmp_name"];
+       $newFilePath2 = "trailer/" . $_FILES["movie_trailer"]["name"];
+       $test = 'abc';
+       if (move_uploaded_file($tmpFilePath2, $newFilePath2) && move_uploaded_file($tmpFilePath1, $newFilePath1)) {
+           // Insert into database
+           echo $query = "INSERT INTO movie (`movie_name`, `movie_image`, `movie_duration`, `movie_description`, `movie_trailer`, `movie_status`) VALUES ('$name', '$newFilePath1', '$time', $description, '$newFilePath2', 'now showing')";
+           if (mysqli_query($conn, $query)) {
+            echo "File uploaded successfully";
+        }
+    } else {
+        echo "Failed to upload file.";
+    }
+       }
 }
 
 ?>
