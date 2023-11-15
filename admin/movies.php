@@ -3,6 +3,7 @@ include_once('include/db.php');
 
 $query = "SELECT * FROM `movie`";
 $result  = mysqli_query($conn, $query);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +20,7 @@ $result  = mysqli_query($conn, $query);
 
   <link rel="stylesheet" href="css/styles.css">
 
-  <link rel="stylesheet" href="css/ticket.css">
+  <link rel="stylesheet" href="css/movie.css">
 </head>
 <body>
   <div class="grid-container">
@@ -127,8 +128,8 @@ $result  = mysqli_query($conn, $query);
                 <td><?=$row['movie_type']?></td>
                 <td><?=$row['movie_status']?></td>
                 <td>
-                  <button><i class="fa-solid fa-pen-to-square"></i></button>
-                  <button><i class="fa-solid fa-trash-can"></i></button>
+                  <span class="edit_movie" onclick="location='edit_movie.php?id=<?= $row['movie_id'] ?>'"><i class="fa-solid fa-pen-to-square"></i></span>
+                  <span class="delete_movie" onclick="deleteMovie(<?= $row['movie_id'] ?>)"><i class="fa-solid fa-trash-can"></i></span>
                 </td>
               </tr>
               <?php } ?>
@@ -161,5 +162,13 @@ $result  = mysqli_query($conn, $query);
 
 
   <script src="js/scripts.js"></script>
+
+  <script>
+  function deleteMovie(movieId) {
+    location.href = 'delete_movie.php?id=' + movieId;
+  }
+</script>
+
+</script>
 </body>
 </html>
