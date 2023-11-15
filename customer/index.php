@@ -11,6 +11,7 @@ $sql1 = mysqli_query($conn, $qry1);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/index.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -80,11 +81,9 @@ $sql1 = mysqli_query($conn, $qry1);
 
   <table class="movie-listings">
   <tr>
-    <td></td> <!-- 左侧空白单元格 -->
     <td>
-      <h2>Now Showing</h2>
+      <h2 style="color: white;">Now Showing</h2>
     </td>
-    <td></td> <!-- 右侧空白单元格 -->
   </tr>
   <tr>
     <?php while ($row = mysqli_fetch_array($sql1)) { ?>
@@ -92,11 +91,21 @@ $sql1 = mysqli_query($conn, $qry1);
         <div>
           <div><?= $row["movie_name"] ?></div>
           <img src="<?= $row["movie_image"] ?>" alt="Movie Image" width="180" height="250">
-          <div><strong>MOVIE DESCRIPTION <?= $row["movie_description"] ?></strong></div>
-          <div><h5>Movie description</h5><?= $row["movie_duration"] ?></div>
-          <div><h5>Movie description</h5><?= $row["release_date"] ?></div>
-          <div><h5>Movie description</h5><?= $row["movie_type"] ?></div>
-          <div><h5>Movie description</h5><?= $row["movie_status"] ?></div>
+          <div><h5>Movie Description</h5>
+          <p><?= $row["movie_description"] ?></p>
+          </div>
+          <div><h5>Movie Duration</h5>
+          <p><?= $row["movie_duration"] ?></p>
+        </div>
+          <div><h5>Release Date</h5>
+          <p><?= $row["release_date"] ?></p>
+        </div>
+          <div><h5>Movie Type</h5>
+          <p><?= $row["movie_type"] ?></p>
+        </div>
+          <div><h5>Movie Status</h5>
+          <p><?= $row["movie_status"] ?></p>
+        </div>
         </div>
       </td>
     <?php } ?>
