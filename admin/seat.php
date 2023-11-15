@@ -4,6 +4,8 @@ include_once('include/db.php');
 $query = "SELECT * FROM `seats`";
 $result = mysqli_query($conn,$query);
 
+
+
 ?>
 
 <!DOCTYPE html>

@@ -11,6 +11,7 @@
 
 
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/room.css">
 </head>
 <body>
   <div class="grid-container">
@@ -84,52 +85,27 @@
         <p class="font-weight-bold">ROOMS</p>
       </div>
 
-      <div class="main-cards">
-
-
-        <div class="card">
-          <div class="card-inner">
-            <p class="text-primary">A01</p>
-            <span class="material-icons-outlined text-blue" onclick="location='seat.php'">chair</span>
-          </div>
+        <div style="margin-top: 70px;" class="flex-container">
+        <a href="seat.php" class="flex-box">
+          A01
+        </a>
+        <a href="seat.php" class="flex-box">
+          A02
+        </a>
+        <a href="seat.php" class="flex-box">
+          A03
+        </a>
+        <a href="seat.php" class="flex-box">
+          A04
+        </a>
+        <a href="seat.php" class="flex-box">
+          A05
+        </a>
+        <a href="seat.php" class="flex-box">
+          A06
+        </a>
         </div>
 
-        <div class="card">
-          <div class="card-inner">
-            <p class="text-primary">A02</p>
-            <span class="material-icons-outlined text-orange" onclick="location='seat.php'">chair</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-inner">
-            <p class="text-primary">A03</p>
-            <span class="material-icons-outlined text-green" onclick="location='seat.php'">chair</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-inner">
-            <p class="text-primary">A04</p>
-            <span class="material-icons-outlined text-red" onclick="location='seat.php'">chair</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-inner">
-            <p class="text-primary">A05</p>
-            <span class="material-icons-outlined text-black" onclick="location='seat.php'">chair</span>
-          </div>                                         
-        </div>
-
-        <div class="card">
-          <div class="card-inner">
-            <p class="text-primary">A06</p>
-            <span class="material-icons-outlined text-black" onclick="location='seat.php'">chair</span>
-          </div>                                         
-        </div>
-
-      </div>
     </main>
   </div>
 
