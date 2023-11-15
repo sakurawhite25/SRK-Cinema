@@ -2,7 +2,7 @@
 include_once('include/db.php');
 
 $query = "SELECT * FROM `movie`";
-$result = mysqli_query($conn,$query);
+$result  = mysqli_query($conn, $query);
 
 ?>
 <!DOCTYPE html>
@@ -16,14 +16,11 @@ $result = mysqli_query($conn,$query);
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
   <link rel="stylesheet" href="css/styles.css">
 
   <link rel="stylesheet" href="css/movie.css">
-
 </head>
 <body>
   <div class="grid-container">
@@ -72,11 +69,11 @@ $result = mysqli_query($conn,$query);
             <a href="customer.php" target="_blank">
             <span class="material-icons-outlined">people</span> Customers
             </a>
-            <li class="sidebar-list-item">
+          </li>
+          <li class="sidebar-list-item">
             <a href="ticket.php" target="_blank">
             <span class="material-icons-outlined">book_online</span> Tickets
             </a>
-          </li>
           </li>
           <li class="sidebar-list-item">
             <a href="review.php" target="_blank">
@@ -93,64 +90,65 @@ $result = mysqli_query($conn,$query);
 
 
     <main class="main-container">
-      <div class="main-title">
-        <p class="font-weight-bold">MOVIES</p>
-      </div>
 
-      <div class="main-cards">
-
-
-        <div class="card">
-          <div class="card-inner">
-            <p class="text-primary">Add New</p>
-            <span class="material-icons-outlined text-blue" onclick="location='add_new.php'">add_box</span>
+      <div class="table">
+        <div class="table_header">
+          <p>Movies Details</p>
+          <div>
+            <input placeholder="Movies"/>
+            <button class="add_new" onclick="window.location.href='add_new.php'">+ Add New</button>
+            <button class="add_new" onclick="window.location.href='arrange_schedule.php'"> Schedule</button>
           </div>
         </div>
-
-        <div class="card">
-          <div class="card-inner">
-            <p class="text-primary">Schedule</p>
-            <span class="material-icons-outlined text-orange" onclick="location='schedule.php'">schedule</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="mov-list">
-		<table id="example" class="table table-striped table-bordered" style="width:100%">
-		<thead>
-            <tr>
+        <div class="table_section">
+          <table>
+            <thead>
+              <tr>
+                <th>Movies</th>
                 <th>Name</th>
-                <th>Image</th>
                 <th>Trailer</th>
                 <th>Description</th>
                 <th>Duration</th>
                 <th>Release Date</th>
                 <th>Type</th>
                 <th>Status</th>
-				<th colspan="2" style="text-align: center;">Modifity</th>
-            </tr>
-        </thead>
-		<tbody>
-      <form action="movies.php" method="post">
-      <?php while($row= mysqli_fetch_array($result)) { ?>
-		<tr>
-                <td><?=$row["movie_name"]?></td>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="movies.php" method="post">
+            <?php while($row= mysqli_fetch_array($result)) { ?>
+              <tr>
+                <td><?=$row['movie_name']?></td>
                 <td><img src="<?= $row['movie_image'] ?>"></td>
-                <td><video width="640" height="360" controls><source src="<?= $row['movie_trailer'] ?>" type="video/mp4"></video></td>
-                <td><?=$row["movie_description"]?></td>
-                <td><?=$row["movie_duration"]?></td>
-                <td><?=$row["release_date"]?></td>
-                <td><?=$row["type"]?></td>
-                <td><?=$row["movie_status"]?></td>
-				<td><span class="material-icons-outlined text-blue" onclick="location='edit_movie.php'">edit</span></td>
-				<td><span class="material-icons-outlined text-red" onclick="location='delete_movie.php'">delete</span></td>
-            </tr>
-            <?php } ?>
-            </form>
-		</tbody>
-		</table>
+                <td><video width="60" height="60" controls><source src="<?= $row['movie_trailer'] ?>" type="video/mp4"></video></td>
+                <td><?=$row['movie_description']?></td>
+                <td><?=$row['movie_duration']?></td>
+                <td><?=$row['release_date']?></td>
+                <td><?=$row['movie_type']?></td>
+                <td><?=$row['movie_status']?></td>
+                <td>
+                  <span class="edit_movie" onclick="location='edit_movie.php?id=<?= $row['movie_id'] ?>'"><i class="fa-solid fa-pen-to-square"></i></span>
+                  <span class="delete_movie" onclick="deleteMovie(<?= $row['movie_id'] ?>)"><i class="fa-solid fa-trash-can"></i></span>
+                </td>
+              </tr>
+              <?php } ?>
+              </form>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <div><i class="fa-solid fa-angles-left"></i></div>
+            <div><i class="fa-solid fa-angle-left"></i></div>
+            <div>1</div>
+            <div>2</div>
+            <div><i class="fa-solid fa-angle-right"></i></div>
+            <div><i class="fa-solid fa-angles-right"></i></div>
+          </div>
         </div>
+      </div>
+      
 
+      </div>
     </main>
   </div>
 
@@ -162,6 +160,15 @@ $result = mysqli_query($conn,$query);
 
   <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
 
+
   <script src="js/scripts.js"></script>
+
+  <script>
+  function deleteMovie(movieId) {
+    location.href = 'delete_movie.php?id=' + movieId;
+  }
+</script>
+
+</script>
 </body>
 </html>
