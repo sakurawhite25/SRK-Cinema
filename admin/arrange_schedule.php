@@ -3,8 +3,18 @@ include_once('include/db.php');
 
 $query = "SELECT * FROM `movie`";
 $result = mysqli_query($conn,$query);
-
+$datetime = new DateTime('2019-09-30 12:00'); 
+  
+	// DateInterval object is taken as the  
+	// parameter of the add() function 
+	// Here 1 day is added 
+	$time=123;
+	$datetime->add(new DateInterval("PT".$time."M")); 
+	
+	// Getting the new date after addition 
+	echo $datetime->format('H:i:s') . "\n"; 
 if (isset($_POST['submit'])) {
+	
 	$name = $_POST['movie_name'];
 	$start_time = $_POST['movie_start_time'];
 	$end_time = $_POST['movie_end_time'];
