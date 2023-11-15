@@ -78,17 +78,30 @@ $sql1 = mysqli_query($conn, $qry1);
     </div>
   </div>
 
-  <div class="movie-listings">
-    <div class="section">
+  <table class="movie-listings">
+  <tr>
+    <td></td> <!-- 左侧空白单元格 -->
+    <td>
       <h2>Now Showing</h2>
-      <div class="movie">
-        <img src="now_showing_movie1.jpg" alt="Now Showing Movie 1">
-        <h3>Movie Title 1</h3>
-        <p>Description of Now Showing Movie 1.</p>
-        <button>Trailer</button>
-      </div>
-      <!-- Add more "Now Showing" movies as needed -->
-    </div>
+    </td>
+    <td></td> <!-- 右侧空白单元格 -->
+  </tr>
+  <tr>
+    <?php while ($row = mysqli_fetch_array($sql1)) { ?>
+      <td class="movie">
+        <div>
+          <div><?= $row["movie_name"] ?></div>
+          <img src="<?= $row["movie_image"] ?>" alt="Movie Image" width="180" height="250">
+          <div><strong>MOVIE DESCRIPTION <?= $row["movie_description"] ?></strong></div>
+          <div><h5>Movie description</h5><?= $row["movie_duration"] ?></div>
+          <div><h5>Movie description</h5><?= $row["release_date"] ?></div>
+          <div><h5>Movie description</h5><?= $row["movie_type"] ?></div>
+          <div><h5>Movie description</h5><?= $row["movie_status"] ?></div>
+        </div>
+      </td>
+    <?php } ?>
+  </tr>
+</table>
     <div class="section">
       <h2>Coming Soon</h2>
       <div class="movie">
@@ -156,29 +169,7 @@ $sql1 = mysqli_query($conn, $qry1);
 
 
 
-<tr>
-  <?php while ($row = mysqli_fetch_array($sql1)) { ?>
-    <td>
-      <?= $row["movie_name"] ?>
-    </td>
-    <td><img src="<?= $row["movie_image"] ?>" alt="Movie Image"></td>
-    <td>
-      <?= $row["movie_description"] ?>
-    </td>
-    <td>
-      <?= $row["movie_duration"] ?>
-    </td>
-    <td>
-      <?= $row["release_date"] ?>
-    </td>
-    <td>
-      <?= $row["movie_type"] ?>
-    </td>
-    <td>
-      <?= $row["movie_status"] ?>
-    </td>
-  </tr>
-<?php } ?>
+
 
 </body>
 
