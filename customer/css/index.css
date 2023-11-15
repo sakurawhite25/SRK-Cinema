@@ -226,12 +226,10 @@ h5 {
   font-weight: bold; /* 加粗文字 */
   color: white; /* 设置颜色为白色 */
   margin: 5px 0; /* 设置标题的上下外边距 */
-  text-decoration: underline; /* 添加底线 */
 }
 
 p {
-  font-size: 18px; /* 调整字体大小 */
-  font-weight: bold; /* 加粗文字 */
+  font-size: 14px; /* 调整字体大小 */
   color: darkgray; /* 设置颜色为白色 */
   margin: 5px 0; /* 设置标题的上下外边距 */
 }
