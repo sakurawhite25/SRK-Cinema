@@ -3,28 +3,8 @@ include_once('include/db.php');
 
 $query = "SELECT * FROM `movie`";
 $result = mysqli_query($conn,$query);
-$datetime = new DateTime('2019-09-30 12:00'); 
-  
-	// DateInterval object is taken as the  
-	// parameter of the add() function 
-	// Here 1 day is added 
-	$time=123;
-	$datetime->add(new DateInterval("PT".$time."M")); 
-	
-	// Getting the new date after addition 
-	echo $datetime->format('H:i:s') . "\n"; 
-if (isset($_POST['submit'])) {
-	
-	$name = $_POST['movie_name'];
-	$start_time = $_POST['movie_start_time'];
-	$end_time = $_POST['movie_end_time'];
-	$upload = "UPDATE `movie` SET movie_start_time = $start_time, movie_end_time = $end_time WHERE movie_name = $name";
-	if(mysqli_query($conn,$upload)) {
-		echo "Information upload sucessfully";
-	}else {
-		echo "Information upload failed";
-	}
-}
+
+
 
 ?>
 
@@ -32,41 +12,36 @@ if (isset($_POST['submit'])) {
 <html>
 <head>
 	<title>Arrange Schedule Page</title>
+	<link rel="stylesheet" href="css/schedule.css">
 </head>
 <body>
 <form action="arrange_schedule.php" method="post">
+<?php while($row = mysqli_fetch_array($result)) { ?>
+	<div>
+		<label for="name">Movie Name</label>
+		<option name="movie_name" value="movie_name">
+			<select name="<?=$row['movie_name']?>" id=""></select>
+		</option>																																																																																																																																																																																																																																																						
+	</div>
 	<table>
-		<?php while($row = mysqli_fetch_array($result)) { ?>
+		<thead>
+			<tr>
+				<th>Time</th>
+				<th>Monday</th>
+				<th>Tuesday</th>
+				<th>Wednesday</th>
+				<th>Thurday</th>
+				<th>Friday</th>
+				<th>Saturday</th>
+				<th>Sunday</th>
+			</tr>
+		</thead>
 		<tbody>
-			<h1>Movie Schedule Page</h1>
 			<tr>
-				<th>Movies :</th>
-				<td>
-					<select name="movie_name" id="movie_name">
-						<option></option>
-						<option><?=$row['movie_name']?></option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<th>Movie Start Time :</th>
-				<td>
-					<input type="date" name="movie_start_time">
-				</td>
-			</tr>
-			<tr>
-				<th>Movie End Time :</th>
-				<td>
-					<input type="date" name="movie_end_time">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<button type="submit" name="submit">Submit</button>
-				</td>
+				<td>2</td>
+				<td>3</td>
 			</tr>
 		</tbody>
-	 <?php } ?>
 	</table>
 </form>
 </body>
