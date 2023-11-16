@@ -8,7 +8,7 @@ if (isset($_GET['id'])) {
     $result = mysqli_query($conn, $query);
 
     if ($result) {
-        echo "Movie deleted successfully!";
+        echo "<script>window.location.href = 'movies.php';alert('Delete Successfully');</script>";
     } else {
         echo "<script>window.location.href = 'movies.php';alert('failed to delete');</script>" . mysqli_error($conn);
     }

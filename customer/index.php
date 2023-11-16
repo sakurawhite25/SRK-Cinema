@@ -41,7 +41,7 @@ $sql1 = mysqli_query($conn, $qry1);
       <div class="carousel-inner">
 
         <div class="item active">
-          <img src="image/2.jpg" alt="" style="width:100%;">
+          <img src="../Mov_images/2.jpg" alt="" style="width:100%;">
           <div class="carousel-caption">
             <h2>Genshin Water God </h2>
             <p></p>
@@ -49,7 +49,7 @@ $sql1 = mysqli_query($conn, $qry1);
         </div>
 
         <div class="item">
-          <img src="image/3.jpg" alt="" style="width:100%;">
+          <img src="../Mov_images/3.jpg" alt="" style="width:100%;">
           <div class="carousel-caption">
             <h2>Digimon 02</h2>
             <p></p>
@@ -57,7 +57,7 @@ $sql1 = mysqli_query($conn, $qry1);
         </div>
 
         <div class="item">
-          <img src="image/4.jpg" alt="" style="width:100%;">
+          <img src="../Mov_images/4.jpg" alt="" style="width:100%;">
           <div class="carousel-caption">
             <h2>Spiderman 2</h2>
             <p></p>
