@@ -6,6 +6,24 @@ INNER JOIN `movie` ON schedule.movie_id = movie.movie_id
 INNER JOIN `rooms` ON schedule.room_id = rooms.room_id";
 $result = mysqli_query($conn, $query);
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $movie_id = $_POST['movie_id'];
+    $start_time = $_POST['start_time'];
+    $schedule_date = $_POST['schedule_date'];
+    $room_id = $_POST['room_id'];
+
+    $insert_schedule = "INSERT INTO `schedule` (movie_id, room_id, start_time, schedule_date) 
+              VALUES ('$movie_id', '$room_id', '$start_time PM', '$schedule_date')";
+
+    $result02 = mysqli_query($conn, $insert_schedule);
+
+    if ($result02) {
+        echo "Schedule successfully added!";
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+}
+
 
 ?>
 
@@ -98,40 +116,50 @@ $result = mysqli_query($conn, $query);
         tbody tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+
+        /* New styles for schedule box */
+        .schedule-box {
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #e0e0e0;
+        }
     </style>
 </head>
 
 <body>
-    <form action="arrange_schedule.php" method="post">
-            <h1>Schedule Details</h1>
-            <div>
-                <label for="movie_name">Movie Name:</label>
-                <select name="movie_name" id="movie_name">
-				<?php while ($row = mysqli_fetch_array($result)) { ?>
-                    <option value="<?= $row['movie_name'] ?>"><?= $row['movie_name'] ?></option>
-				<?php } ?>
-                </select>
-            </div>
-            <div>
-                <label for="start_time">Duration: </label>
-                <input type="time" name="start_time">
-            </div>
-            <div>
-                <label for="schedule_date">Date: </label>
-                <input type="date" name="schedule_date">
-            </div>
-			<div>
-                <label for="room_name">Room: </label>
-                <select name="room_name" id="room_name">
-				<?php while ($row = mysqli_fetch_array($result)) { ?>
-                    <option value="<?= $row['room_name'] ?>"><?= $row['room_name'] ?></option>
-				<?php } ?>
-                </select>
-            </div>
-            <div>
-                <button type="submit" name="submit">Submit</button>
-            </div>
-    </form>
+<form action="arrange_schedule.php" method="post">
+    <h1>Schedule Details</h1>
+    <div>
+        <label for="movie_name">Movie Name:</label>
+        <select name="movie_id" id="movie_id">
+            <?php while ($row = mysqli_fetch_array($result)) { ?>
+                <option value="<?= $row['movie_id'] ?>"><?= $row['movie_name'] ?></option>
+            <?php } ?>
+        </select>
+    </div>
+    <div>
+        <label for="start_time">Duration: </label>
+        <input type="time" name="start_time">
+    </div>
+    <div>
+        <label for="schedule_date">Date: </label>
+        <input type="date" name="schedule_date">
+    </div>
+    <div>
+        <label for="room_name">Room: </label>
+        <select name="room_id" id="room_id">
+            <?php mysqli_data_seek($result, 0); // Reset the result pointer ?>
+            <?php while ($row = mysqli_fetch_array($result)) { ?>
+                <option value="<?= $row['room_id'] ?>"><?= $row['room_name'] ?></option>
+            <?php } ?>
+        </select>
+    </div>
+    <!-- Hidden input for movie_id -->
+    <input type="hidden" name="movie_id" value="<?= $row['movie_id'] ?>">
+    <div>
+        <button type="submit" name="submit">Submit</button>
+    </div>
+</form>
 
     <table>
         <thead>
@@ -147,24 +175,33 @@ $result = mysqli_query($conn, $query);
             </tr>
         </thead>
         <tbody>
-            <tr>
-				<td>
-					<p>10:00AM-12:00PM</p>
-				</td>
-				<td>
-					<p>12:00PM-2:00PM</p>
-				</td>
-				<td><p>2:00PM</p></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
+            <?php while ($row = mysqli_fetch_array($result)) { ?>
+                <!-- Add more rows for other time slots if needed -->
+                <tr>
+                    <td>
+                        <p>10:00AM-12:00PM</p>
+                    </td>
+                    <td class="schedule-box">
+                        <p><?= $row['movie_name'] ?></p>
+                        <p><?= $row['room_name'] ?></p>
+                        <p><?= $row['schedule_date'] ?></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>12:00PM-2:00PM</p>
+                    </td>
+                    <td class="schedule-box">
+                        <p><?= $row['movie_name'] ?></p>
+                        <p><?= $row['room_name'] ?></p>
+                        <p><?= $row['schedule_date'] ?></p>
+                    </td>
+                </tr>
+                <!-- Add more rows for other time slots if needed -->
+            <?php } ?>
         </tbody>
     </table>
 </body>
 
 </html>
+
