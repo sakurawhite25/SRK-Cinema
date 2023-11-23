@@ -1,49 +1,53 @@
 <?php
 include_once('include/db.php');
 
-if(isset($_POST['submit'])){
-	if(!empty($_POST['username']) && !empty($_POST['password'])){
-		$username=$_POST['username'];
-		$password=$_POST['password'];
-		$Query="SELECT * FROM `customer` WHERE customer_username='$username'";
-		$result=mysqli_query($conn,$Query);
-		$rows=mysqli_num_rows($result);
-		$row=mysqli_fetch_array($result);
+// if(isset($_POST['submit'])){
+// 	if(!empty($_POST['username']) && !empty($_POST['password'])){
+// 		$username=$_POST['username'];
+// 		$password=$_POST['password'];
+// 		$Query="SELECT * FROM `customer` WHERE customer_username='$username'";
+// 		$result=mysqli_query($conn,$Query);
+// 		$rows=mysqli_num_rows($result);
+// 		$row=mysqli_fetch_array($result);
 
-		if($rows==1){
-			$_SESSION['username']=$username;
-			$_SESSION['password']=$password;
-			$_SESSION["id"]=$row[0];
-			echo "<script>window.location.href='index.php';
-			alert('Successfully Login.');</script>";
-		}else{
-			echo "<script>alert('Wrong Username or Password!Please try again.');</script>";
-		}
-	}else{
-		echo "<script>alert('Please Insert Username or Password!');</script>";
-		}
-	}
+// 		if($rows==1){
+// 			$_SESSION['username']=$username;
+// 			$_SESSION['password']=$password;
+// 			$_SESSION["id"]=$row[0];
+// 			echo "<script>window.location.href='index.php';
+// 			alert('Successfully Login.');</script>";
+// 		}else{
+// 			echo "<script>alert('Wrong Username or Password!Please try again.');</script>";
+// 		}
+// 	}else{
+// 		echo "<script>alert('Please Insert Username or Password!');</script>";
+// 		}
+// 	}
 
 
  if(isset($_POST['register'])) {
  	$customer_name = $_POST['customer_username'];
-    $customer_email = $_POST['customer_email'];
-    $customer_address = $_POST['customer_address'];
     $customer_password = $_POST['customer_password'];
     $hash = password_hash($customer_password, PASSWORD_DEFAULT);
+    $customer_address = $_POST['customer_address'];
     $customer_contactno = $_POST['customer_contactno'];
-    $query = "INSERT INTO `customer`(customer_username,customer_email,customer_address,customer_password,customer_contactno,`status`) VALUES ('$customer_name','$customer_email','$customer_address','$hash','$customer_contactno','unactive')";
-    if ($result = mysqli_query($conn,$query)) {
-        echo "<script>window.location.href = 'customer_login.php';alert('Successfully Register')</script>";
-    }else{
-        echo "<script>window.location.href = 'customer_login.php';alert('Failed Register');</script>";
-    }
+    $customer_email = $_POST['customer_email'];
+    echo $query = "INSERT INTO `customer`(customer_username,customer_password,customer_address,customer_contactno,customer_email,`status`) VALUES ('$customer_name','$hash','$customer_address','$customer_contactno','$customer_email','active')";
+    var_dump($query);
+    // if ($result = mysqli_query($conn,$query)) {
+    //     echo "<script>window.location.href = 'customer_login.php';alert('Successfully Register')</script>";
+    // }else{
+    //     echo "<script>window.location.href = 'customer_login.php';alert('Failed Register');</script>";
+    // }
 }
 ?>
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>1</title>
-        <link rel="stylesheet" href="login_test.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     </head>
     <body>
         <div class="hero">
@@ -53,22 +57,22 @@ if(isset($_POST['submit'])){
                     <button type="button" class="toggle-btn" onclick="login()">Log In</button>
                     <button type="button" class="toggle-btn" onclick="register()">Register</button>
                 </div>
-                
-            <form id="login" class="input-group">
+            <form id="login" class="input-group" action="customer_login.php">
                 <input type="text" class="input-field" placeholder="UserName" required>
                 <input type="text" class="input-field" placeholder="Password" required>
                 <input type="checkbox" class="check-box "><span>Remenber Password</span>
                 <button type="submit" class="submit-btn">Log In</button>
             </form>
-            <form id="register" class="input-group">
-                <input type="text" class="input-field" placeholder="User Id" required>
-                <input type="email" class="input-field" placeholder="Email Id" required>
-                <input type="text" class="input-field" placeholder="Enter Password" required>
+            <form id="register" class="input-group" action="customer_login.php">
+                <input type="text" class="input-field" placeholder="User Id" >
+                <input type="text" class="input-field" placeholder="Enter Password" >
+                <input type="text" class="input-field" placeholder="Address" >
+                <input type="text" class="input-field" placeholder="Contact_No" >
+                <input type="email" class="input-field" placeholder="Email Id" >
                 <input type="checkbox" class="check-box "><span>I agree to the terms condition</span>
-                <button type="submit" class="submit-btn">Register</button>
+                <button type="submit" class="submit-btn" name="register" value="register">Register</button>
             </form>
             </div>
-
         </div>
 
         <script>
@@ -107,7 +111,7 @@ if(isset($_POST['submit'])){
 }
 .form-box{
     width: 380px;
-    height: 480px;
+    height: 550px;
     position: relative;
     margin: 6% auto;
     background: #fff;
@@ -138,17 +142,6 @@ if(isset($_POST['submit'])){
     background: linear-gradient(to right, #ff105f,#ffad06);
     border-radius: 30px;
     transition: .5s;
-}
-.social-icons{
-    margin: 30px auto;
-    text-align: center;
-}
-.social-icons img{
-    width: 30px;
-    margin: 0 12px;
-    box-shadow: 0 0 20px 0 #7f7f7f3d;
-    cursor: pointer;
-    border-radius: 50;
 }
 .input-group{
     top: 180px;
