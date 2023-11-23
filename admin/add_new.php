@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
 	$type = $_POST['movie_type'];
 
 	if(move_uploaded_file($image,$img_location) && move_uploaded_file($trailer,$trl_location)){
-		$query = "INSERT INTO `movie`(movie_name, movie_image, movie_trailer, movie_description, movie_duration, release_date, movie_type, movie_status) VALUES('$name', '$img_location',  '$trl_location', '$description', '$duration', '$date', '$type', 'Now Showing')";
+		$query = "INSERT INTO `movie`(movie_name, movie_image, movie_trailer, movie_description, movie_duration, release_date, movie_type, movie_status) VALUES('$name', '$img_location',  '$trl_location', '$description', '$duration', '$date', '$type', 'Coming Soon')";
 
 		if (mysqli_query($conn,$query)) {
 			echo "<script>alert('add successfully')</script>";

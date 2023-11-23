@@ -1,8 +1,31 @@
 <?php
 include_once('include/db.php');
 
+
 $query = "SELECT * FROM `movie`  WHERE movie_id = '" . $_GET["id"] . "'";
 $result = mysqli_query($conn,$query);
+
+if(isset($_POST["submit"])){
+  $image = $_FILES["movie_image"]["tmp_name"];
+	$img_location = "../Mov_images/".$_FILES["movie_image"]["name"];
+	$trailer = $_FILES["movie_trailer"]["tmp_name"];
+	$trl_location = "../trailer/".$_FILES["movie_trailer"]["name"];
+  $name = $_POST['movie_name'];
+  $description = $_POST['movie_description'];
+  $duration = $_POST['movie_duration'];
+  $date = $_POST['release_date'];
+  $type = $_POST['movie_type'];
+
+  if(move_uploaded_file($image,$img_location) && move_uploaded_file($trailer,$trl_location)){
+		$update = "UPDATE `movie` SET `movie_image` = '$img_location' , `movie_trailer` = '$trl_location' , `movie_name` = '$name', `movie_description` = '$description', `movie_duration` = '$duration' , `release_date` = '$date', `movie_type` = '$type'  WHERE movie_id = '" . $_GET["id"] . "'";
+
+		if (mysqli_query($conn,$update)) {
+			echo "<script>alert('add successfully')</script>";
+		} else {
+			echo "<script>window.location.href = 'movies.php';alert('failed to add');</script>";
+		}
+	}
+}
 
 ?>
 <!DOCTYPE html>
@@ -17,7 +40,7 @@ sdadsadad
 
 </head>
 <body>
-<form action="edit_movie.php?id=<?=$_GET['id']; ?>" method="post">
+<form action="edit_movie.php?id=<?=$_GET['id']; ?>" method="post" enctype="multipart/form-data">
 <div class="container">
 <div class="row flex-lg-nowrap">
   <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
@@ -54,15 +77,19 @@ sdadsadad
                     <div class="text-muted"><small>Duration: <?=$row["movie_duration"]?></small></div>
                     <div class="text-muted"><small>Release Date: <?=$row["release_date"]?></small></div>
                     <div class="mt-2">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fa fa-fw fa-camera"></i>
-                        <span>Change Photo</span>
-                      </button>
-                      <button class="btn btn-primary" type="button">
-                        <i class="fa fa-video-camera"></i>
-                        <span>Change Trailer</span>
-                      </button>
-                    </div>
+                    <label for="changePhotoInput" class="btn btn-primary">
+                      <i class="fa fa-fw fa-camera"></i>
+                      <span>Change Photo</span>
+                    </label>
+                    <input type="file" id="changePhotoInput" name="movie_image" accept=".jpg, .jpeg, .png" style="display: none;">
+
+                    <label for="changeTrailerInput" class="btn btn-primary">
+                      <i class="fa fa-fw fa-video-camera"></i>
+                      <span>Change Trailer</span>
+                    </label>
+                    <input type="file" id="changeTrailerInput" name="movie_trailer" accept=".mp4, .mov" style="display: none;">
+
+                  </div>
                   </div>
                 </div>
               </div>
@@ -77,88 +104,47 @@ sdadsadad
                         <div class="row">
                           <div class="col">
                             <div class="form-group">
-                              <label>Full Name</label>
-                              <input class="form-control" type="text" name="name" placeholder="John Smith" value="John Smith">
+                              <label>Movie Name</label>
+                              <input class="form-control" type="text" name="movie_name" placeholder="<?= $row['movie_name'] ?>" value="<?= $row['movie_name'] ?>">
                             </div>
                           </div>
                           <div class="col">
                             <div class="form-group">
-                              <label>Username</label>
-                              <input class="form-control" type="text" name="username" placeholder="johnny.s" value="johnny.s">
+                              <label>Type</label>
+                              <select class="form-control" name="movie_type" id="movie_id">
+                              <option value="<?= $row['movie_type'] ?>" selected><?= $row['movie_type'] ?></option>
+                              <option value="Action">Action</option>
+					          <option value="Comedy">Comedy</option>
+					          <option value="Romance">Romance</option>
+					          <option value="Horror">Horror</option>
+					          <option value="Animation">Animation</option>
+					          <option value="Science Fiction">Science Fiction</option>
+					          <option value="Drama">Drama</option>
+                             </select>
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col">
                             <div class="form-group">
-                              <label>Email</label>
-                              <input class="form-control" type="text" placeholder="user@example.com">
+                              <label>Duration</label>
+                              <input class="form-control" type="text" name="movie_duration" placeholder="<?= $row['movie_duration'] ?>" value="<?= $row['movie_duration'] ?>">
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col mb-3">
                             <div class="form-group">
-                              <label>Address</label>
-                              <input class="form-control" type="text" placeholder="taman example">
+                              <label>Release Date</label>
+                              <input class="form-control" type="date" name="release_date" placeholder="<?= $row['release_date'] ?>" value="<?= $row['release_date'] ?>">
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col">
                             <div class="form-group">
-                              <label>ContactNo</label>
-                              <input class="form-control" type="text" placeholder="01xxxxxxxx">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-12 col-sm-6 mb-3">
-                        <div class="mb-2"><b>Change Password</b></div>
-                        <div class="row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label>Current Password</label>
-                              <input class="form-control" type="password" placeholder="••••••">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label>New Password</label>
-                              <input class="form-control" type="password" placeholder="••••••">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
-                              <input class="form-control" type="password" placeholder="••••••"></div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-12 col-sm-5 offset-sm-1 mb-3">
-                        <div class="mb-2"><b>Keeping in Touch</b></div>
-                        <div class="row">
-                          <div class="col">
-                            <label>Email Notifications</label>
-                            <div class="custom-controls-stacked px-2">
-                              <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="notifications-blog" checked="">
-                                <label class="custom-control-label" for="notifications-blog">Blog posts</label>
-                              </div>
-                              <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="notifications-news" checked="">
-                                <label class="custom-control-label" for="notifications-news">Newsletter</label>
-                              </div>
-                              <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="notifications-offers" checked="">
-                                <label class="custom-control-label" for="notifications-offers">Personal Offers</label>
-                              </div>
+                              <label>Description</label>
+                              <textarea class="form-control" name="movie_description" placeholder="<?= $row['movie_description'] ?>" value="<?= $row['movie_description'] ?>"></textarea>
                             </div>
                           </div>
                         </div>
@@ -166,7 +152,7 @@ sdadsadad
                     </div>
                     <div class="row">
                       <div class="col d-flex justify-content-end">
-                        <button class="btn btn-primary" type="submit">Save Changes</button>
+                        <button class="btn btn-primary" type="submit" name="submit">Save Changes</button>
                       </div>
                     </div>
                   </form>
@@ -182,10 +168,7 @@ sdadsadad
         <div class="card mb-3">
           <div class="card-body">
             <div class="px-xl-3">
-              <button class="btn btn-block btn-secondary">
-                <i class="fa fa-sign-out"></i>
-                <span>Back</span>
-              </button>
+            <a href="movies.php" class="btn btn-block btn-secondary"><i class="fa fa-sign-out"></i><span>Back</span></a>
             </div>
           </div>
         </div>
@@ -204,5 +187,15 @@ sdadsadad
 </div>
 </div>
 </form>
+<script>
+    document.getElementById('changePhotoInput').addEventListener('click', function() {
+      document.getElementById('changePhotoInput').click();
+    });
+
+    document.getElementById('changeTrailerInput').addEventListener('click', function () {
+      document.getElementById('changeTrailerInput').click();
+    }
+
+  </script>
 </body>
 </html>
